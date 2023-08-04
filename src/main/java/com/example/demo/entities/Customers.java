@@ -1,60 +1,51 @@
 package com.example.demo.entities;
 
-public class Customers {
-    private Accounts account;
-    private Banks bank;
-    private String fullName;
-    private String phoneNumber;
-    private String email;
-    private Long balance;
-    private String pin;
-    
-    public Banks getBank() {
-        return bank;
-    }
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-    public void setBank_id(Banks bank) {
-        this.bank = bank;
-    }
+@Entity
+@Table(name="tb_m_customers")
+public class Customers {
+    @Id
+    private String account_id;
+    
+    private String fullname;
+    private String phonenumber;
+    private String email;
+    
+    @MapsId
+    @OneToOne
+    @JoinColumn(name="account_id")
+    private Accounts account;
 
     public Accounts getAccount() {
         return account;
     }
-
     public void setAccount(Accounts account) {
         this.account = account;
     }
-
-    public String getFullName() {
-        return fullName;
+    public String getAccount_id() {
+        return account_id;
     }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setAccount_id(String account_id) {
+        this.account_id = account_id;
     }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
+    
+    public String getFullname() {
+        return fullname;
     }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
-
-    public Long getBalance() {
-        return balance;
+    public String getPhonenumber() {
+        return phonenumber;
     }
-
-    public void setBalance(Long balance) {
-        this.balance = balance;
-    }
-
-    public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
     public String getEmail() {
         return email;
@@ -65,23 +56,20 @@ public class Customers {
     public Customers(){
         System.out.println("Customers");
     }
-    public Customers(Accounts account, String fullName, String phoneNumber, String email, String pin, Long balance, Banks bank){
-        this.account=account;
-        this.fullName=fullName;
-        this.phoneNumber=phoneNumber;
-        this.pin=pin;
-        this.balance=balance;
+    public Customers(String account, String fullname, String phonenumber, String email, String pin, Long balance, Banks bank){
+        this.account_id=account;
+        this.fullname=fullname;
+        this.phonenumber=phonenumber;
         this.email = email;
-        this.bank=bank;
     }
-    public Customers(Accounts account, String fullName, String phoneNumber, String email){
-        this.account=account;
-        this.fullName=fullName;
-        this.phoneNumber=phoneNumber;
+    public Customers(String account, String fullname, String phonenumber, String email){
+        this.account_id=account;
+        this.fullname=fullname;
+        this.phonenumber=phonenumber;
         this.email = email;
     }
 
-    public Customers(Accounts account){
-        this.account=account;
+    public Customers(String account){
+        this.account_id=account;
     }
 }

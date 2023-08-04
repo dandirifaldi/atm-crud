@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/f88b54f2e6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Customers Data</h1>
+    <a th:href="@{customer/form}">CREATE</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Pin</th>
+                <th>Balance</th>
+                <th>customer</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.account_id}" />
+                <td th:text="${customer.fullname}" />
+                <td th:text="${customer.phonenumber}" />
+                <td th:text="${customer.email}" />
+                <td th:text="${customer.account.pin}" />
+                <td th:text="${customer.account.balance}" />
+                <td th:text="|${customer.account.bank_id.name} (${customer.account.bank_id.bank_id})|" />
+                <td>
+                    <span>
+                    <form th:action="@{/customer/delete/{id} (id = ${customer.account_id})}" method="post">
+                        <input type="submit" value="delete" class="btn btn-danger">
+                    </form></span> |
+                <span><a th:href="@{customer/form/{id} (id=${customer.account_id})}" class>Edit</a></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

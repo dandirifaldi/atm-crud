@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:action="@{/customer/save}" method="post" th:object="${customer}">
+    <input type="text" th:field="*{account.account_id}" id="id">
+    <label for="name">Name : </label>
+    <input type="text" th:field="*{fullname}" id="name">
+    <label for="phone">Phone Number : </label>
+    <input type="text" th:field="*{phonenumber}" id="phone">
+    <label for="email">Email : </label>
+    <input type="email" th:field="*{email}" id="email">
+    <label for="pin">Pin : </label>
+    <input type="text" th:field="*{account.pin}" id="pin">
+    <label for="balance">Account Balance : </label>
+    <input type="text" th:field="*{account.balance}" id="balance">
+    <label for="bank">Bank : </label>
+    <select name="bank" id="bank" th:field="*{account.bank_id}">
+        <option th:each="bank: ${banksList}" th:value="${bank.bank_id}" th:text="${bank.name}" />
+    </select>
+    <input type="submit" value="Save ">
+  </form>
+</body>
+</html>

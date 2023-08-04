@@ -1,9 +1,26 @@
 package com.example.demo.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_m_accounts")
 public class Accounts {
-    private String account_id, pin; 
+    @Id
+    private String account_id;
+    private String pin;
+    @ManyToOne
+    @JoinColumn(name="bank_id")
     private Banks bank_id;
     private Long balance;
+    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "account")
+    private Customers customer;
 
     public Banks getBank_id() {
         return bank_id;
@@ -29,10 +46,6 @@ public class Accounts {
     }
     public void setBalance(Long balance) {
         this.balance = balance;
-    }
-
-    public Accounts(){
-        System.out.println("This Account Construct");
     }
 
 }

@@ -1,22 +1,42 @@
 package com.example.demo.entities;
 
-public class Atms {
-    private Integer atm_id;
-    public Long atmBalance;
-    private String location;
-    private Banks bank;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="tb_m_atms")
+public class Atms {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer atm_id;
+    private String location;
+    @ManyToOne
+    @JoinColumn(name="bank_id")
+    private Banks bank_id;
+    public Long atm_balance;
+
+    public Banks getBank_id() {
+        return bank_id;
+    }
+    public void setBank_id(Banks bank_id) {
+        this.bank_id = bank_id;
+    }
+    public Long getAtm_balance() {
+        return atm_balance;
+    }
+    public void setAtm_balance(Long atm_balance) {
+        this.atm_balance = atm_balance;
+    }
     public Integer getAtm_id() {
         return atm_id;
     }
     public void setAtm_id(Integer atm_id) {
         this.atm_id = atm_id;
-    }
-    public Long getAtmBalance() {
-        return atmBalance;
-    }
-    public void setAtmBalance(Long atmBalance) {
-        this.atmBalance = atmBalance;
     }
     public String getLocation() {
         return location;
@@ -24,26 +44,19 @@ public class Atms {
     public void setLocation(String location) {
         this.location = location;
     }
-    public Banks getBank() {
-        return bank;
-    }
-    public void setBank(Banks bank) {
-        this.bank = bank;
-    }
-
     public Atms(){
         System.out.println("Atms Data");
     }
-    public Atms(Integer atm_id, String location, Banks bank, Long atmBalance){
+    public Atms(Integer atm_id, String location, Banks bank_id, Long atm_balance){
         this.atm_id=atm_id;
         this.location=location;
-        this.bank=bank;
-        this.atmBalance=atmBalance;
+        this.bank_id=bank_id;
+        this.atm_balance=atm_balance;
     }
-    public Atms( String location, Banks bank, Long atmBalance){
+    public Atms( String location, Banks bank_id, Long atm_balance){
         this.location=location;
-        this.bank=bank;
-        this.atmBalance=atmBalance;
+        this.bank_id=bank_id;
+        this.atm_balance=atm_balance;
     }
     public Atms(Integer atm_id){
         this.atm_id=atm_id;

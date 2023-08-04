@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:action="@{/atm/save}" method="post" th:object="${atm}">
+      <input type="text" readonly th:field="*{atm_id}" id="id">
+    <label for="location">ATM Location : </label>
+    <input type="text" th:field="*{location}" id="location">
+    <label for="atm_balance">ATM Balance : </label>
+    <input type="text" th:field="*{atm_balance}" id="atm_balance">
+    <label for="atm_id">Bank : </label>
+    <select name="atm_id" id="atm_id" th:field="*{bank_id}">
+        <option th:each="bank: ${banksList}" th:value="${bank.bank_id}" th:text="${bank.name}" />
+    </select>
+    <input type="submit" value="Save Category">
+  </form>
+</body>
+</html>

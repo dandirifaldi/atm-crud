@@ -1,46 +1,66 @@
 package com.example.demo.controllers;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entities.Banks;
-import com.example.demo.services.BanksServiceImpl;
+import com.example.demo.services.BanksService;
 
+@Controller
+@RequestMapping("bank")
 public class BanksController {
-    BanksServiceImpl banksService = new BanksServiceImpl();
-
-    public List<Banks> getAll(){
-        return banksService.getAll();
+    @Autowired
+    private BanksService bankService;
+    
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("banks", bankService.Get());
+        return "bank/index";
     }
 
-    public String Post(Banks bank){
-        Boolean result = banksService.Post(bank);
-        if (result == true) {
-            return "Insert Success!";
-        }else{
-            return "Insert Unsuccess!";
-        }
-    }
-
-    public Banks Get(String bank_id){
-        Banks result  = banksService.Get(bank_id);
-        return result;
-    }
-
-    public String Delete(String bank_id){
-        Boolean result = banksService.Delete(bank_id);
-        if (result == true) {
-            return "Delete Success!";
+    @GetMapping(value = {"form", "form/{id}"})
+    public String form(@PathVariable(required = false) String id, Model model) {
+        if (id != null) {
+            model.addAttribute("bank", bankService.Get(id));
         } else {
-            return "Delete Unsuccess!";
+            model.addAttribute("bank", new Banks());
         }
-    }
-    public String Put(Banks bank){
-        Boolean result = banksService.Put(bank);
-        if (result == true) {
-            return "Success!";
-        } else {
-            return "Unsuccess!";
-        }
+        return "banks/form";
     }
 
+    // @GetMapping("form")
+    // public String form(Model model){
+    //     model.addAttribute("banks", new Banks());
+    //     return "banks/form";
+    // }
+
+    @PostMapping("save")
+    public String submit(Banks bank){
+        Boolean result= bankService.Save(bank);
+        if (result) {
+            return "redirect:/bank";
+        } else{
+            return "banks:/form";
+        }
+    }
+    // save
+    // banks/save
+    // @PostMapping("save")
+    // public String banksSave(Banks banks) {
+    //     banksService.Save(banks);
+    //     return "redirect:/banks";
+    // }
+
+    // delete
+    // banks/delete/1
+    @PostMapping("delete/{id}")
+    public String bankDelete(@PathVariable(required =true) String id){
+        bankService.Delete(id);
+        return "redirect:/bank";
+    }
 }

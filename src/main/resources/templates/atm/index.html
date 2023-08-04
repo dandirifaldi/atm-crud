@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATMs</title>
+</head>
+<body>
+    <h1>ATMs Data</h1>
+    <a th:href="@{atm/form}">CREATE</a>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Location</th>
+                <th>ATM Balance</th>
+                <th>Bank Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="atm : ${atms}">
+                <td th:text="${atm.atm_id}" />
+                <td th:text="${atm.location}" />
+                <td th:text="${#numbers.formatCurrency(atm.atm_balance)}" />
+                <td th:text="|${atm.bank_id.name} (${atm.bank_id.bank_id})|" />
+                <td>
+                    <span>
+                    <form th:action="@{/atm/delete/{id} (id = ${atm.atm_id})}" method="post">
+                        <input type="submit" value="delete" class="btn btn-danger">
+                    </form></span> |
+                <span><a th:href="@{atm/form/{id} (id=${atm.atm_id})}" class>Edit</a></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
