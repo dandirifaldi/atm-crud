@@ -1,12 +1,17 @@
 package com.example.demo.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tb_m_atms")
@@ -19,6 +24,10 @@ public class Atms {
     @JoinColumn(name="bank_id")
     private Banks bank_id;
     public Long atm_balance;
+    
+    @OneToMany(mappedBy = "atm")
+    @JsonIgnore
+    private List<Transaction> transaction;
 
     public Banks getBank_id() {
         return bank_id;
@@ -45,7 +54,7 @@ public class Atms {
         this.location = location;
     }
     public Atms(){
-        System.out.println("Atms Data");
+        System.out.println("Initialize Atms Data...");
     }
     public Atms(Integer atm_id, String location, Banks bank_id, Long atm_balance){
         this.atm_id=atm_id;

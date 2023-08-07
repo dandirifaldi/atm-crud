@@ -62,6 +62,7 @@ public class CustomersController {
     @PostMapping("delete/{id}")
     public String accountDelete(@PathVariable(required =true) String id){
         cusService.Delete(id);
+        accService.Delete(id);
         return "redirect:/customer";
     }
 }

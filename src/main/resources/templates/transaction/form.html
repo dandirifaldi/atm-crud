@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Transaction</title>
+</head>
+<body>
+  <form th:action="@{/transaction/save}" method="post" th:object="${transaction}">
+    <input type="text" th:field="*{account.account_id}" id="id">
+    <label for="transactiontype">Transaction Type : </label>
+    <select name="transactiontype" id="transactiontype" th:field="*{transactiontype}">
+        <!-- <option th:each="bank: ${banksList}" th:value="${bank.bank_id}" th:text="${bank.name}" /> -->
+        <option value="deposit">Deposit</option>
+        <option value="withdraw">Withdraw</option>
+        <option value="transfer">Transfer</option>
+        <option value="top up">Top Up</option>
+        <option value="pay bill">Pay Bill</option>
+    </select>
+    <label for="transfered_to">Transfered To </label>
+    <input type="text" th:field="*{transferedto}" id="transferedto">
+    <label for="amount">Amount </label>
+    <input type="text" th:field="*{amount}" id="amount">
+    <select name="atm" id="atm" th:field="*{atm.atm_id}">
+        <option th:each="atm: ${atmList}" th:value="${atm.atm_id}" th:text="${atm.Location}" />
+    </select>
+    <input type="submit" value="Save ">
+  </form>
+</body>
+</html>

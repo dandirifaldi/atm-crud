@@ -54,7 +54,7 @@ public class Customers {
         this.email = email;
     }
     public Customers(){
-        System.out.println("Customers");
+        System.out.println("Initialize Customers...");
     }
     public Customers(String account, String fullname, String phonenumber, String email, String pin, Long balance, Banks bank){
         this.account_id=account;

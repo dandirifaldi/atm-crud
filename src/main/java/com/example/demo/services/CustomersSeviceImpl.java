@@ -23,6 +23,7 @@ public class CustomersSeviceImpl implements CustomersService{
         return customerRepo.findById(account_id).orElseThrow(null);
     }
 
+
     @Override
     public Boolean Save(Customers model) {
         customerRepo.save(model);
@@ -36,5 +37,9 @@ public class CustomersSeviceImpl implements CustomersService{
         return !customerRepo.findById(account).isPresent();
     }
 
-    
+    @Override
+    public Customers GetByFullname(String name) {
+        return customerRepo.findByFullname(name);
+
+    }
 }

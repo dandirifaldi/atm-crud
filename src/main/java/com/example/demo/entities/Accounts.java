@@ -1,12 +1,17 @@
 package com.example.demo.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tb_m_accounts")
@@ -21,6 +26,10 @@ public class Accounts {
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "account")
     private Customers customer;
+
+    @OneToMany(mappedBy = "accounts")
+    @JsonIgnore
+    private List<Transaction> transaction;
 
     public Banks getBank_id() {
         return bank_id;

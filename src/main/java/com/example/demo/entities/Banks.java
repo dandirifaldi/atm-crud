@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name ="tb_m_banks")
 public class Banks {
@@ -15,6 +17,7 @@ public class Banks {
     private String name;
 
     @OneToMany(mappedBy = "bank_id")
+    @JsonIgnore
     private List<Atms> atms;
     
     public String getName() {
@@ -34,7 +37,7 @@ public class Banks {
     }
 
     public Banks(){
-        System.out.println("Banks Data");
+        System.out.println("Initialize Banks Data...");
     }
     
     public Banks(String bank_id, String name){
