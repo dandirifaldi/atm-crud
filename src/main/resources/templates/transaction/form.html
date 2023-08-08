@@ -6,7 +6,10 @@
 </head>
 <body>
   <form th:action="@{/transaction/save}" method="post" th:object="${transaction}">
-    <input type="text" th:field="*{account.account_id}" id="id">
+    <input type="text" th:field="*{acount}" id="id" name="acount">
+    <!-- <select name="account" id="account" th:field="*{acount}">
+      <option th:each="account: ${accountsList}" th:value="${account.account_id}" th:text="|${account.account_id} - ${account.fullname}|" />
+  </select> -->
     <label for="transactiontype">Transaction Type : </label>
     <select name="transactiontype" id="transactiontype" th:field="*{transactiontype}">
         <!-- <option th:each="bank: ${banksList}" th:value="${bank.bank_id}" th:text="${bank.name}" /> -->
@@ -20,8 +23,8 @@
     <input type="text" th:field="*{transferedto}" id="transferedto">
     <label for="amount">Amount </label>
     <input type="text" th:field="*{amount}" id="amount">
-    <select name="atm" id="atm" th:field="*{atm.atm_id}">
-        <option th:each="atm: ${atmList}" th:value="${atm.atm_id}" th:text="${atm.Location}" />
+    <select name="atm" id="atm" th:field="*{atm}">
+        <option th:each="atm: ${atmsList}" th:value="${atm.atm_id}" th:text="${atm.location}" />
     </select>
     <input type="submit" value="Save ">
   </form>

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entities.Accounts;
-import com.example.demo.entities.Transaction;
+import com.example.demo.entities.Transactions;
+import com.example.demo.services.AccountsService;
 import com.example.demo.services.AtmsService;
 import com.example.demo.services.TransactionsService;
 
@@ -20,6 +21,8 @@ public class TransactionController {
     @Autowired
     private AtmsService atmService;
     @Autowired
+    private AccountsService accountService;
+    @Autowired
     private TransactionsService transactionsService;
 
     @GetMapping
@@ -27,19 +30,21 @@ public class TransactionController {
         // model.addAttribute("customers", cusService.Get());
         // model.addAttribute("accounts", accService.Get());
         model.addAttribute("transactions", transactionsService.Get());
+        
         return "transaction/index";
     }
 
     @GetMapping(value = "form")
-    public String form(@PathVariable(required = false) Accounts id, Model model) {
+    public String form(Model model) {
         model.addAttribute("atmsList", atmService.Get());
-        model.addAttribute("transaction", transactionsService.Get());
+        model.addAttribute("accountsList", accountService.Get());
+        model.addAttribute("transaction", new Transactions());
         return "transaction/form";
     }
 
 
     @PostMapping("save")
-    public String submit(Transaction transaction){
+    public String submit(Transactions transaction){
         Boolean result2= transactionsService.Save(transaction);
         if (result2) {
             return "redirect:/transaction";

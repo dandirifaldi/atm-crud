@@ -2,11 +2,10 @@ package com.example.demo.services;
 
 import java.util.List;
 
-import com.example.demo.entities.Accounts;
-import com.example.demo.entities.Transaction;
+import com.example.demo.entities.Transactions;
 
 public interface TransactionsService {
-    List<Transaction> Get();
-    Transaction Get(Accounts account);
-    Boolean Save(Transaction trnansaction);
+    List<Transactions> Get();
+    Transactions Get(Integer id);
+    Boolean Save(Transactions trnansaction);
 }

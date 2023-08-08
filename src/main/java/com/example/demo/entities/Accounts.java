@@ -27,34 +27,48 @@ public class Accounts {
     @OneToOne(mappedBy = "account")
     private Customers customer;
 
-    @OneToMany(mappedBy = "accounts")
+    @OneToMany(mappedBy = "acount")
     @JsonIgnore
-    private List<Transaction> transaction;
-
-    public Banks getBank_id() {
-        return bank_id;
-    }
-    public void setBank_id(Banks bank_id) {
-        this.bank_id = bank_id;
-    }
+    private List<Transactions> transaction;
 
     public String getAccount_id() {
         return account_id;
     }
+
     public void setAccount_id(String account_id) {
         this.account_id = account_id;
     }
+
     public String getPin() {
         return pin;
     }
+
     public void setPin(String pin) {
         this.pin = pin;
     }
+
+    public Banks getBank_id() {
+        return bank_id;
+    }
+
+    public void setBank_id(Banks bank_id) {
+        this.bank_id = bank_id;
+    }
+
     public Long getBalance() {
         return balance;
     }
+
     public void setBalance(Long balance) {
         this.balance = balance;
     }
+
+    public Customers getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customers customer) {
+        this.customer = customer;
+    }  
 
 }

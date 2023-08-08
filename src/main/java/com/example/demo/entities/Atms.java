@@ -27,7 +27,7 @@ public class Atms {
     
     @OneToMany(mappedBy = "atm")
     @JsonIgnore
-    private List<Transaction> transaction;
+    private List<Transactions> transaction;
 
     public Banks getBank_id() {
         return bank_id;

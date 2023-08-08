@@ -32,11 +32,6 @@ public class CustomersRestController {
         return Response.generateResponse(HttpStatus.OK, "Data Retrieved",  customersService.Get(id));
     }
 
-    @GetMapping("customer/name/{name}")
-    public ResponseEntity<Object> getByName(@PathVariable(required = true) String name) {
-        return Response.generateResponse(HttpStatus.OK, "Data Retrieved",  customersService.GetByName(name));
-    }
-
     @PostMapping("customer")
     public ResponseEntity<Object> post(@RequestBody Customers customer) {
         Boolean result = customersService.Save(customer);

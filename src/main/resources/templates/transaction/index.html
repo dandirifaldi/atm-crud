@@ -11,8 +11,11 @@
         <script src="https://kit.fontawesome.com/f88b54f2e6.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Transactions Data</h1>
-    <a th:href="@{transaction/form}">CREATE</a>
+    <marquee behavior="" direction="left">
+        <h1>Transactions Data</h1>
+    </marquee>
+    
+    <a th:href="@{/transaction/form}">CREATE</a>
     <table class="table">
         <thead>
             <tr>
@@ -26,7 +29,7 @@
         </thead>
         <tbody>
             <tr th:each="transaction : ${transactions}">
-                <td th:text="${transaction.accounts.account_id}" />
+                <td th:text="${transaction.acount.account_id}" /> 
                 <td th:text="${transaction.transactiontype}" />
                 <td th:text="${transaction.transferedto}" />
                 <td th:text="${transaction.amount}" />

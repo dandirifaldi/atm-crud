@@ -7,5 +7,4 @@ import com.example.demo.entities.Customers;
 
 @Repository
 public interface CustomersRepository extends JpaRepository<Customers, String>{
-    Customers findByFullname(String fullname);
 }
