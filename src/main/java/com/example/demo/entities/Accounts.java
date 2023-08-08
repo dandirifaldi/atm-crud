@@ -2,6 +2,7 @@ package com.example.demo.entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,14 +18,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="tb_m_accounts")
 public class Accounts {
     @Id
+    @Column(name="account_id")
     private String account_id;
     private String pin;
     @ManyToOne
     @JoinColumn(name="bank_id")
     private Banks bank_id;
     private Long balance;
-    @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "account")
+    @PrimaryKeyJoinColumn
+    @JsonIgnore
     private Customers customer;
 
     @OneToMany(mappedBy = "acount")

@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 @Table(name="tb_m_customers")
 public class Customers {
     @Id
+    @Column(name = "account_id")
     private String account_id;
     
     private String fullname;

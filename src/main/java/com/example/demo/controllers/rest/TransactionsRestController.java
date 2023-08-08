@@ -19,6 +19,7 @@ import com.example.demo.services.TransactionsService;
 public class TransactionsRestController {
     @Autowired
     private TransactionsService transactionsService;
+    
     @GetMapping("transaction")
     public ResponseEntity<Object> get(){
         return Response.generateResponse(HttpStatus.OK, "All data retrieved", transactionsService.Get());
