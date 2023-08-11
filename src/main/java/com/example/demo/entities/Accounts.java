@@ -30,6 +30,17 @@ public class Accounts {
     @JsonIgnore
     private Customers customer;
 
+    @OneToOne
+    @JoinColumn(name="card_id")
+    private Cards card;
+    public Cards getCard() {
+        return card;
+    }
+
+    public void setCard(Cards card) {
+        this.card = card;
+    }
+
     @OneToMany(mappedBy = "acount")
     @JsonIgnore
     private List<Transactions> transaction;
